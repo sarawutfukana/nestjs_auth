@@ -5,11 +5,14 @@ import {
   NestMiddleware,
 } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
+import { VendorsService } from 'src/vendors/vendors.service';
 
 @Injectable()
 export class AuthVendorMiddleware implements NestMiddleware {
+  constructor(private readonly vendorsServices: VendorsService) {}
+
   async use(req: Request, res: Response, next: NextFunction) {
-    const token = req.headers['x-api-key'];
+    const token = req.headers['x-api-key'] ?? req.headers['X-API-KEY'];
     let lang = req.headers['lang'];
 
     if (!token) {
@@ -24,5 +27,11 @@ export class AuthVendorMiddleware implements NestMiddleware {
     }
 
     req['lang'] = lang;
+
+    const vendor = await this.vendorsServices.authVendors(token.toString());
+    req['vendorId'] = vendor.id;
+    req['vendorName'] = vendor.name;
+
+    next();
   }
 }

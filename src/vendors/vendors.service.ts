@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Vendor } from './entities/vendor.entity';
 import { Repository } from 'typeorm';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class VendorsService {
@@ -22,11 +23,15 @@ export class VendorsService {
       );
     }
 
-    if (!vendor.status) {
+    // Convert the expire date to a dayjs object
+    const expireDate = dayjs(vendor.expire);
+    if (!vendor.status || expireDate.isBefore(dayjs())) {
       throw new HttpException(
         'Credentials are not valid',
         HttpStatus.UNAUTHORIZED,
       );
     }
+
+    return vendor;
   }
 }
