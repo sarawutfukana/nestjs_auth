@@ -1,5 +1,5 @@
 export interface IncomingLog {
-  level: string;
+  severity: 'INFO' | 'ERROR';
   requestId: string;
   requestInfo: {
     method: string;

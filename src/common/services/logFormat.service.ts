@@ -7,7 +7,7 @@ import * as dayjs from 'dayjs';
 export class LogFormatService {
   incoming(@Request() req: ExtendRequest): void {
     const formattedLogData: IncomingLog = {
-      level: 'INFO',
+      severity: 'INFO',
       requestId: req.requestId,
       requestInfo: {
         method: req.method,

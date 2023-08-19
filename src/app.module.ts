@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/configuration';
-import ormconfig from './ormconfig';
+import dbConfig from './ormconfig';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { VendorsModule } from './vendors/vendors.module';
 import { ConfigModule } from '@nestjs/config';
@@ -15,7 +15,7 @@ import { AuthVendorMiddleware } from './common/middleware/authVendor.middleware'
     ConfigModule.forRoot({
       load: [configuration],
     }),
-    TypeOrmModule.forRoot(ormconfig),
+    TypeOrmModule.forRoot(dbConfig),
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 10,
