@@ -10,16 +10,16 @@ import {
 @Entity({ name: 'vendors' }) // tags is table name
 @Index('idx_vendor_name', ['name']) // Index name and column(s)
 export class Vendor {
-  @PrimaryColumn({ type: 'varchar', length: 16 })
+  @PrimaryColumn()
   id: string;
 
-  @Column({ type: 'varchar', length: 32, nullable: false })
+  @Column()
   name: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column()
   token: string;
 
-  @Column({ type: 'boolean', nullable: false, default: true })
+  @Column({ type: 'boolean', default: true })
   status: boolean;
 
   @Column({

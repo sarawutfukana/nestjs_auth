@@ -9,6 +9,7 @@ import { VendorsModule } from './vendors/vendors.module';
 import { ConfigModule } from '@nestjs/config';
 import { RequestIdMiddleware } from './common/middleware/requestId.middleware';
 import { AuthVendorMiddleware } from './common/middleware/authVendor.middleware';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AuthVendorMiddleware } from './common/middleware/authVendor.middleware'
       limit: 10,
     }),
     VendorsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
