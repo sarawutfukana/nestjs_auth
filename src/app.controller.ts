@@ -5,11 +5,14 @@ import { LogFormatService } from './common/services/logFormat.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly logService: LogFormatService,
+  ) {}
 
   @Get()
   getHello(@Request() req: ExtendRequest): object {
-    new LogFormatService().incoming(req);
+    this.logService.incoming(req);
     return this.appService.getHello('index');
   }
 }

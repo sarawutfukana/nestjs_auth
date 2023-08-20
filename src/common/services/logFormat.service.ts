@@ -2,6 +2,7 @@ import { Injectable, Logger, Request } from '@nestjs/common';
 import { ExtendRequest } from '../interfaces/extendRequest.interface';
 import { IncomingLog } from '../interfaces/incomingLog.interface';
 import * as dayjs from 'dayjs';
+import { ErrorLog } from '../interfaces/errorLog.interface';
 
 @Injectable()
 export class LogFormatService {
@@ -20,5 +21,19 @@ export class LogFormatService {
       host: req.ip,
     };
     Logger.log(formattedLogData);
+  }
+
+  error(errorLog: ErrorLog): void {
+    const obj = {
+      severity: 'ERROR',
+      success: errorLog.success,
+      requestId: errorLog.requestId,
+      vendorId: errorLog.vendorId,
+      code: errorLog.code,
+      message: errorLog.message,
+      detail: errorLog.detail,
+      dateTime: dayjs().format(),
+    };
+    Logger.error(obj);
   }
 }

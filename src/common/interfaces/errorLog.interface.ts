@@ -1,8 +1,8 @@
 export interface ErrorLog {
-  severity: 'ERROR';
   requestId: string;
+  vendorId: string;
+  success: false;
   code: string;
   message: string;
   detail: any;
-  dateTime: string;
 }

@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RequestIdMiddleware } from './common/middleware/requestId.middleware';
 import { AuthVendorMiddleware } from './common/middleware/authVendor.middleware';
 import { UsersModule } from './users/users.module';
+import { LogFormatService } from './common/services/logFormat.service';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, LogFormatService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
